@@ -72,6 +72,9 @@ jobs:
           java-version: '23'
           cache: gradle
 
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
+
       - name: Package with Gradle
         run: ./gradlew bootJar
 
