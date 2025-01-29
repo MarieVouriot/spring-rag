@@ -1,4 +1,4 @@
-package fr.efrei.springrag.controller;
+package fr.efrei.springrag.web.rest;
 
 import fr.efrei.springrag.domain.Document;
 import fr.efrei.springrag.service.DocumentService;
@@ -13,10 +13,10 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-public class DocumentController {
+public class DocumentRessource {
     private final DocumentService documentService;
 
-    public DocumentController(DocumentService documentService) {
+    public DocumentRessource(DocumentService documentService) {
         this.documentService = documentService;
     }
 
@@ -31,5 +31,12 @@ public class DocumentController {
         return ResponseEntity
                 .created(new URI("/documents/" + result.getId()))
                 .body(result);
+    }
+
+    @PostMapping("/documents/chat2/{user}")
+    public String chat2(@RequestBody String query) throws InterruptedException {
+        String result = documentService.chat(query);
+
+        return result;
     }
 }
